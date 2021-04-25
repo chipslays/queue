@@ -9,7 +9,7 @@ trait DriverTrait
     /**
      * @var Collection
      */
-    private $config;
+    protected $config;
 
     public function __construct(array $config = [])
     {
