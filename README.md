@@ -1,6 +1,6 @@
 # 🛒 Queue
 
-todo
+Simple implement queue processing in PHP.
 
 # Installation
 
