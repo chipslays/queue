@@ -81,3 +81,93 @@ print_r($data);
 //     [amount] => 10
 // )
 ```
+
+# Queue
+
+Base class for queue manipulate.
+
+## Methods
+
+### `__construct`
+
+```php
+/**
+ * @param DriverInterface $driver
+ */
+public function __construct(DriverInterface $driver);
+```
+
+### `add`
+
+```php
+/**
+ * Add item to queue.
+ *
+ * @param string $channel
+ * @param array $data
+ * @param integer $sort
+ * @return void
+ */
+public function add(string $channel, array $data, int $sort = QUEUE_DEFAULT_SORT): void;
+```
+
+### `first`
+
+```php
+/**
+ * Get first item in queue.
+ *
+ * @param string $channel
+ * @return Collection|null
+ */
+public function first(string $channel = ''): ?Collection;
+```
+
+### `next`
+
+```php
+/**
+ * Get next item in queue.
+ *
+ * @param string $channel
+ * @return array|null
+ */
+public function next(string $channel = ''): ?array;
+```
+
+### `delete`
+
+```php
+/**
+ * Delete item from queue.
+ *
+ * @param string|Collection $channel Can pass as result from `first` method.
+ * @param string $id
+ * @return boolean
+ */
+public function delete($channel, string $id = null): bool;
+```
+
+### `list`
+
+```php
+/**
+ * Get list of queue items.
+ *
+ * @param string $channel
+ * @return array|null Array of `ids` or null if channel not exists.
+ */
+public function list(string $channel = ''): ?array;
+```
+
+### `count`
+
+```php
+/**
+ * Get count of items in queue.
+ *
+ * @param string $channel
+ * @return integer
+ */
+public function count(string $channel = ''): int;
+```
