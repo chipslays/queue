@@ -1,10 +1,11 @@
 {
     "name": "chipslays/queue",
-    "description": "PHP implementation of Simple Message Queue",
+    "description": "Simple implement queue processing in PHP.",
     "keywords": [
         "queue",
         "message-queue",
-        "queue-workers"
+        "queue-workers",
+        "queue-manager"
     ],
     "type": "library",
     "license": "MIT",
