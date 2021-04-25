@@ -1,0 +1,19 @@
+{
+    "name": "chipslays/queue",
+    "description": "PHP implementation of Simple Message Queue",
+    "keywords": [
+        "queue",
+        "message-queue",
+        "queue-workers"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "chipslays/collection": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Chipslays\\Queue\\": "src/"
+        }
+    }
+}
