@@ -3,14 +3,21 @@
 namespace Chipslays\Queue;
 
 use Chipslays\Collection\Collection;
+use Chipslays\Queue\Drivers\DriverInterface;
 
 define('QUEUE_DEFAULT_SORT', 500);
 
 class Queue
 {
+    /**
+     * @var DriverInterface
+     */
     private $driver;
 
-    public function __construct($driver)
+    /**
+     * @param DriverInterface $driver
+     */
+    public function __construct(DriverInterface $driver)
     {
         $this->driver = $driver;
     }
