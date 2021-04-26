@@ -25,21 +25,25 @@ class Queue
     /**
      * Add item to queue.
      *
+     * Returns the `id` of the added item.
+     *
      * @param string $channel
      * @param array $data
      * @param integer $sort
-     * @return void
+     * @return string
      */
-    public function add(string $channel, array $data, int $sort = QUEUE_DEFAULT_SORT): void
+    public function add(string $channel, array $data, int $sort = QUEUE_DEFAULT_SORT): string
     {
-        $this->driver->add($channel, $data, $sort);
+        return $this->driver->add($channel, $data, $sort);
     }
 
     /**
      * Get list of queue items.
      *
+     * Returns array of `id's`, if `channel` not exists returns `null`.
+     *
      * @param string $channel
-     * @return array|null Array of `ids` or null if channel not exists.
+     * @return array|null
      */
     public function list(string $channel = ''): ?array
     {
@@ -49,16 +53,20 @@ class Queue
     /**
      * Get count of items in queue.
      *
+     * Returns count, if `channel` not exists returns 0.
+     *
      * @param string $channel
      * @return integer
      */
     public function count(string $channel = ''): int
     {
-       return $this->driver->count($channel);
+        return $this->driver->count($channel);
     }
 
     /**
-     * Get next item on queue.
+     * Get next item in queue.
+     *
+     * Returns array of data, if queue is empty returns `null`.
      *
      * @param string $channel
      * @return array|null
@@ -71,6 +79,9 @@ class Queue
     /**
      * Get first item in queue.
      *
+     * Returns `Collection` of array with `channel`, `id`, `data`,
+     * if queue is empty or `channel` not exists returns `null`.
+     *
      * @param string $channel
      * @return Collection|null
      */
@@ -82,6 +93,8 @@ class Queue
     /**
      * Delete item from queue.
      *
+     * Returns `true` on success delete and `false` on fail.
+     *
      * @param string|Collection $channel Can pass as result from `first` method.
      * @param string $id
      * @return boolean
@@ -89,5 +102,19 @@ class Queue
     public function delete($channel, string $id = null): bool
     {
         return $this->driver->delete($channel, $id);
+    }
+
+    /**
+     * Get item position in queue.
+     *
+     * Return position, if `channel` or `id` not exists returns 0.
+     *
+     * @param string $channel
+     * @param string $id
+     * @return int
+     */
+    public function position(string $channel, string $id): int
+    {
+        return $this->driver->position($channel, $id);
     }
 }

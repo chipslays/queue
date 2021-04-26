@@ -14,7 +14,8 @@ $queue->add('payment', ['id' => 1, 'amount' => 10]);
 $queue->add('payment', ['id' => 2, 'amount' => 10]);
 $queue->add('payment', ['id' => 3, 'amount' => 10]);
 $queue->add('payment', ['id' => 4, 'amount' => 10]);
-$queue->add('payment', ['id' => 5, 'amount' => 10]);
-// print_r($queue->next('payment'));
+$id = $queue->add('payment', ['id' => 5, 'amount' => 10]);
+
+echo $queue->position('payment', $id);
 
 
