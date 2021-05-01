@@ -15,6 +15,8 @@ $ composer require chipslays/queue
 
 ### Client
 
+We push something to queue.
+
 ```php
 use Chipslays\Queue\Queue;
 use Chipslays\Queue\Drivers\File;
@@ -30,6 +32,8 @@ $queue->add('payment', ['id' => 1, 'amount' => 10]);
 ```
 
 ### Worker
+
+We have worker, who get value from queue and starts processing.
 
 ```php
 use Chipslays\Queue\Queue;
@@ -59,6 +63,8 @@ while (true) {
 ```
 
 ### Cron
+
+Or instead worker, we have a cron.
 
 ```php
 use Chipslays\Queue\Queue;
