@@ -64,7 +64,7 @@ while (true) {
 
 ### Cron
 
-Or instead worker, we have a cron.
+Or instead worker, we have a cron job.
 
 ```php
 use Chipslays\Queue\Queue;
