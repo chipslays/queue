@@ -1,5 +1,8 @@
 # 🛒 Queue
 
+![Packagist Version](https://img.shields.io/packagist/v/chipslays/queue)
+![GitHub](https://img.shields.io/github/license/chipslays/queue)
+
 Simple implement queue processing in PHP.
 
 # Installation
