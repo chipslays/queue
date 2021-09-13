@@ -145,7 +145,7 @@ use Chipslays\Queue\Queue;
 
 $queue = new Queue($driver);
 $id = $queue->add('payment', ['key' => 'value']);
-echo $queue->position($id); // e.g. 1
+echo $queue->position('payment', $id); // e.g. 1
 ```
 
 ### `first`
@@ -326,5 +326,5 @@ use Chipslays\Queue\Queue;
 
 $queue = new Queue($driver);
 $id = $queue->add('payment', ['key' => 'value']);
-echo $queue->position($id); // e.g. 1
+echo $queue->position('payment', $id); // e.g. 1
 ```
