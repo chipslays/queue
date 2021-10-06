@@ -28,7 +28,7 @@ $driver = new File([
 ]);
 
 $queue = new Queue($driver);
-$queue->add('payment', ['id' => 1, 'amount' => 10]);
+$queue->add('payment', ['user_id' => 1, 'amount' => 10]);
 ```
 
 ### Worker
@@ -56,7 +56,7 @@ while (true) {
 
     // Array
     // (
-    //     [id] => 1
+    //     [user_id] => 1
     //     [amount] => 10
     // )
 }
@@ -86,7 +86,7 @@ print_r($data);
 
 // Array
 // (
-//     [id] => 1
+//     [user_id] => 1
 //     [amount] => 10
 // )
 ```
@@ -120,7 +120,6 @@ $driver = new File([
 
 $queue = new Queue($driver);
 ```
-
 
 ### `add`
 
