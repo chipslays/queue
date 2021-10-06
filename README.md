@@ -174,9 +174,9 @@ if (!$item) {
     return;
 }
 
-echo $item->get('channel') . PHP_EOL;
-echo $item->get('id') . PHP_EOL;
-print_r($item->get('data'));
+echo $item->channel . PHP_EOL;
+echo $item->id . PHP_EOL;
+print_r($item->data);
 ```
 
 ### `next`
@@ -248,7 +248,7 @@ if (!$item) {
 $queue->delete($item);
 
 // Delete by `channel` and `id`.
-$queue->delete($item->get('channel'), $item->get('id'));
+$queue->delete($item->channel, $item->id);
 ```
 
 ### `list`
