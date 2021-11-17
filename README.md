@@ -70,12 +70,10 @@ while (true) {
 
 ### Cron
 
-Or instead worker, we have a cron job.
+Or instead loop worker, we can use a cron job.
 
 <details>
   <summary><b>cron-worker.php</b></summary>
-
-
 
 ```php
 use Chipslays\Queue\Queue;
