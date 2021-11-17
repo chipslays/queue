@@ -35,6 +35,10 @@ $queue->add('payment', ['user_id' => 1, 'amount' => 10]);
 
 We have worker, who get value from queue and starts processing.
 
+<details>
+  <summary><b>worker.php</b></summary>
+
+
 ```php
 use Chipslays\Queue\Queue;
 use Chipslays\Queue\Drivers\File;
@@ -61,10 +65,17 @@ while (true) {
     // )
 }
 ```
+</details>
+
 
 ### Cron
 
 Or instead worker, we have a cron job.
+
+<details>
+  <summary><b>cron-worker.php</b></summary>
+
+
 
 ```php
 use Chipslays\Queue\Queue;
@@ -90,6 +101,7 @@ print_r($data);
 //     [amount] => 10
 // )
 ```
+</details>
 
 # Queue
 
