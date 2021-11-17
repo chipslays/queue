@@ -41,5 +41,4 @@ class Queue
 
         return call_user_func_array([$this->driver, $name], $arguments);
     }
-
 }

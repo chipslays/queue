@@ -147,6 +147,29 @@ $id = $queue->add('payment', ['key' => 'value']);
 echo $queue->position('payment', $id); // e.g. 1
 ```
 
+### `get`
+
+```php
+    /**
+     * Get item by ID.
+     *
+     * @param string $channel
+     * @param string $id
+     * @return array|null
+     */
+    public function get(string $channel, string $id): ?array;
+```
+
+Example:
+
+```php
+use Chipslays\Queue\Queue;
+
+$queue = new Queue($driver);
+$id = $queue->add('payment', ['key' => 'value']);
+print_r($queue->get('payment', $id)); // ['key' => 'value']
+```
+
 ### `first`
 
 ```php
