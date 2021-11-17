@@ -1,5 +1,8 @@
 # 🛒 Queue
 
+![Packagist Version](https://img.shields.io/packagist/v/chipslays/queue)
+![GitHub](https://img.shields.io/github/license/chipslays/queue)
+
 Simple implement queue processing in PHP.
 
 # Installation
@@ -12,6 +15,8 @@ $ composer require chipslays/queue
 
 ### Client
 
+We push something to queue.
+
 ```php
 use Chipslays\Queue\Queue;
 use Chipslays\Queue\Drivers\File;
@@ -23,10 +28,12 @@ $driver = new File([
 ]);
 
 $queue = new Queue($driver);
-$queue->add('payment', ['id' => 1, 'amount' => 10]);
+$queue->add('payment', ['user_id' => 1, 'amount' => 10]);
 ```
 
 ### Worker
+
+We have worker, who get value from queue and starts processing.
 
 ```php
 use Chipslays\Queue\Queue;
@@ -49,13 +56,15 @@ while (true) {
 
     // Array
     // (
-    //     [id] => 1
+    //     [user_id] => 1
     //     [amount] => 10
     // )
 }
 ```
 
 ### Cron
+
+Or instead worker, we have a cron job.
 
 ```php
 use Chipslays\Queue\Queue;
@@ -77,7 +86,7 @@ print_r($data);
 
 // Array
 // (
-//     [id] => 1
+//     [user_id] => 1
 //     [amount] => 10
 // )
 ```
@@ -112,7 +121,6 @@ $driver = new File([
 $queue = new Queue($driver);
 ```
 
-
 ### `add`
 
 ```php
@@ -136,7 +144,7 @@ use Chipslays\Queue\Queue;
 
 $queue = new Queue($driver);
 $id = $queue->add('payment', ['key' => 'value']);
-echo $queue->position($id); // e.g. 1
+echo $queue->position('payment', $id); // e.g. 1
 ```
 
 ### `first`
@@ -166,9 +174,9 @@ if (!$item) {
     return;
 }
 
-echo $item->get('channel') . PHP_EOL;
-echo $item->get('id') . PHP_EOL;
-print_r($item->get('data'));
+echo $item->channel . PHP_EOL;
+echo $item->id . PHP_EOL;
+print_r($item->data);
 ```
 
 ### `next`
@@ -240,7 +248,7 @@ if (!$item) {
 $queue->delete($item);
 
 // Delete by `channel` and `id`.
-$queue->delete($item->get('channel'), $item->get('id'));
+$queue->delete($item->channel, $item->id);
 ```
 
 ### `list`
@@ -317,5 +325,5 @@ use Chipslays\Queue\Queue;
 
 $queue = new Queue($driver);
 $id = $queue->add('payment', ['key' => 'value']);
-echo $queue->position($id); // e.g. 1
+echo $queue->position('payment', $id); // e.g. 1
 ```
