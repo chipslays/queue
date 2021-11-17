@@ -15,4 +15,6 @@ if (!$item = $queue->next('payment')) {
     exit;
 }
 
-print_r($data);
+echo 'channel: ' . $item->getChannel() . '/' . $item->channel . PHP_EOL;
+echo 'id: ' . $item->getId() . '/' . $item->id . PHP_EOL;
+echo 'data: ' . print_r($item->getData(), true) . '/' . print_r($item->data, true) . PHP_EOL;

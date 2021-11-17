@@ -52,17 +52,15 @@ $driver = new File([
 $queue = new Queue($driver);
 
 while (true) {
-    if (!$data = $queue->next('payment')) {
+    if (!$item = $queue->next('payment')) {
         continue;
     }
 
-    print_r($data);
+    echo 'channel: ' . $item->getChannel() . PHP_EOL;
+    echo 'id: ' . $item->getId() . PHP_EOL;
+    echo 'data: ' . print_r($item->getData(), true) . PHP_EOL;
 
-    // Array
-    // (
-    //     [user_id] => 1
-    //     [amount] => 10
-    // )
+    // also can be getting by magic getter: $item->id, $item->channel, $item->data
 }
 ```
 </details>
@@ -91,13 +89,11 @@ if (!$item = $queue->next('payment')) {
     exit;
 }
 
-print_r($data);
+echo 'channel: ' . $item->getChannel() . PHP_EOL;
+echo 'id: ' . $item->getId() . PHP_EOL;
+echo 'data: ' . print_r($item->getData(), true) . PHP_EOL;
 
-// Array
-// (
-//     [user_id] => 1
-//     [amount] => 10
-// )
+// also can be getting by magic getter: $item->id, $item->channel, $item->data
 ```
 </details>
 
@@ -141,7 +137,7 @@ $queue = new Queue($driver);
  *
  * @param string $channel
  * @param array $data
- * @param integer $sort
+ * @param int $sort
  * @return string
  */
 public function add(string $channel, array $data, int $sort = QUEUE_DEFAULT_SORT): string;
@@ -165,9 +161,9 @@ echo $queue->position('payment', $id); // e.g. 1
  *
  * @param string $channel
  * @param string $id
- * @return array|null
+ * @return QueueItem|null
  */
-public function get(string $channel, string $id): ?array;
+public function get(string $channel, string $id): ?QueueItem;
 ```
 
 Example:
@@ -177,22 +173,27 @@ use Chipslays\Queue\Queue;
 
 $queue = new Queue($driver);
 $id = $queue->add('payment', ['key' => 'value']);
-print_r($queue->get('payment', $id)); // ['key' => 'value']
+$item = $queue->get('payment', $id));
+
+echo 'channel: ' . $item->getChannel() . PHP_EOL;
+echo 'id: ' . $item->getId() . PHP_EOL;
+echo 'data: ' . print_r($item->getData(), true) . PHP_EOL;
+
+// also can be getting by magic getter: $item->id, $item->channel, $item->data
 ```
 
 ### `first`
 
 ```php
-/**
+ /**
  * Get first item in queue.
  *
- * Returns `Collection` of array with `channel`, `id`, `data`,
- * if queue is empty or `channel` not exists returns `null`.
+ * If queue is empty or `channel` not exists returns `null`.
  *
  * @param string $channel
- * @return Collection|null
+ * @return QueueItem|null
  */
-public function first(string $channel): ?Collection;
+public function first(string $channel): ?QueueItem;
 ```
 
 Example:
@@ -207,9 +208,11 @@ if (!$item) {
     return;
 }
 
-echo $item->channel . PHP_EOL;
-echo $item->id . PHP_EOL;
-print_r($item->data);
+echo 'channel: ' . $item->getChannel() . PHP_EOL;
+echo 'id: ' . $item->getId() . PHP_EOL;
+echo 'data: ' . print_r($item->getData(), true) . PHP_EOL;
+
+// also can be getting by magic getter: $item->id, $item->channel, $item->data
 ```
 
 ### `next`
@@ -218,12 +221,10 @@ print_r($item->data);
 /**
  * Get next item in queue.
  *
- * Returns array of data, if queue is empty returns `null`.
- *
  * @param string $channel
- * @return array|null
+ * @return QueueItem|null
  */
-public function next(string $channel): ?array;
+public function next(string $channel): ?QueueItem;
 ```
 
 Example:
@@ -241,13 +242,11 @@ if (!$data = $queue->next('payment')) {
     return;
 }
 
-print_r($data);
+echo 'channel: ' . $item->getChannel() . PHP_EOL;
+echo 'id: ' . $item->getId() . PHP_EOL;
+echo 'data: ' . print_r($item->getData(), true) . PHP_EOL;
 
-// Array
-// (
-//     [currency] => EUR
-//     [amount] => 10
-// )
+// also can be getting by magic getter: $item->id, $item->channel, $item->data
 ```
 
 ### `delete`
@@ -258,7 +257,7 @@ print_r($data);
  *
  * Returns `true` on success delete and `false` on fail.
  *
- * @param string|Collection $channel Can pass as result from `first` method.
+ * @param string|QueueItem $channel e.g. Can be passed as result from `first` method.
  * @param string $id
  * @return boolean
  */
@@ -307,13 +306,13 @@ print_r($queue->list('payment'));
 
 // Array
 //
-//     [0] => someId__1
-//     [1] => someId__2
-//     [2] => someId__3
+//     [0] => item_id_1
+//     [1] => item_id_2
+//     [2] => item_id_3
 // )
 ```
 
-> **NOTE:** For each driver, the name of the `id` may be different.
+> **NOTE:** For each driver, the name of the `id` may be different!
 
 ### `count`
 

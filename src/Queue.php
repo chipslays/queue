@@ -2,7 +2,6 @@
 
 namespace Chipslays\Queue;
 
-use Chipslays\Collection\Collection;
 use Chipslays\Queue\Drivers\DriverInterface;
 use Exception;
 
@@ -10,9 +9,9 @@ define('QUEUE_DEFAULT_SORT', 500);
 
 /**
  * @method string add(string $channel, array $data, int $sort = QUEUE_DEFAULT_SORT)
- * @method array|null get(string $channel, string $id)
- * @method array|null next(string $channel)
- * @method Collection|null first(string $channel)
+ * @method QueueItem|null get(string $channel, string $id)
+ * @method QueueItem|null next(string $channel)
+ * @method QueueItem|null first(string $channel)
  * @method boolean delete($channel, string $id = null)
  * @method array|null list(string $channel)
  * @method int count(string $channel)

@@ -3,6 +3,7 @@
 namespace Chipslays\Queue\Drivers;
 
 use Chipslays\Collection\Collection;
+use Chipslays\Queue\QueueItem;
 
 interface DriverInterface
 {
@@ -30,44 +31,41 @@ interface DriverInterface
      *
      * @param string $channel
      * @param string $id
-     * @return array|null
+     * @return QueueItem|null
      */
-    public function get(string $channel, string $id): ?array;
+    public function get(string $channel, string $id): ?QueueItem;
 
     /**
      * Get next item in queue.
      *
-     * Returns array of data, if queue is empty returns `null`.
-     *
      * @param string $channel
-     * @return array|null
+     * @return QueueItem|null
      */
-    public function next(string $channel): ?array;
+    public function next(string $channel): ?QueueItem;
 
     /**
      * Get first item in queue.
      *
-     * Returns `Collection` of array with `channel`, `id`, `data`,
-     * if queue is empty or `channel` not exists returns `null`.
+     * If queue is empty or `channel` not exists returns `null`.
      *
      * @param string $channel
-     * @return Collection|null
+     * @return QueueItem|null
      */
-    public function first(string $channel): ?Collection;
+    public function first(string $channel): ?QueueItem;
 
     /**
      * Delete item from queue.
      *
      * Returns `true` on success delete and `false` on fail.
      *
-     * @param string|Collection $channel Can pass as result from `first` method.
+     * @param string|QueueItem $channel e.g. Can be passed as result from `first` method.
      * @param string $id
      * @return boolean
      */
     public function delete($channel, string $id = null): bool;
 
     /**
-     * Get list of queue items.
+     * Get all items IDs from queue.
      *
      * Returns array of `id's`, if `channel` not exists returns `null`.
      *

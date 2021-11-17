@@ -3,6 +3,7 @@
 namespace Chipslays\Queue\Drivers;
 
 use Chipslays\Collection\Collection;
+use Chipslays\Queue\QueueItem;
 use FilesystemIterator;
 
 class File implements DriverInterface
@@ -25,16 +26,20 @@ class File implements DriverInterface
         return $id;
     }
 
-    public function get(string $channel, string $id): ?array
+    public function get(string $channel, string $id): ?QueueItem
     {
         if (!file_exists($this->getPath($channel))) {
             return null;
         }
 
-        return unserialize(file_get_contents($this->getPath($channel) . '/' . $id));
+        return new QueueItem([
+            'channel' => $channel,
+            'id' => $id,
+            'data' => unserialize(file_get_contents($this->getPath($channel) . '/' . $id))
+        ]);
     }
 
-    public function next(string $channel): ?array
+    public function next(string $channel): ?QueueItem
     {
         $item = $this->first($channel);
 
@@ -44,10 +49,10 @@ class File implements DriverInterface
 
         $this->delete($item);
 
-        return $item->get('data');
+        return $item;
     }
 
-    public function first(string $channel): ?Collection
+    public function first(string $channel): ?QueueItem
     {
         if ($this->count($channel) === 0) {
             return null;
@@ -56,18 +61,18 @@ class File implements DriverInterface
         $path = $this->getPath($channel);
         $id = scandir($path)[2];
 
-        return new Collection([
+        return new QueueItem([
             'channel' => $channel,
             'id' => $id,
-            'data' => unserialize(file_get_contents($path . '/' . $id)),
+            'data' => unserialize(file_get_contents($path . '/' . $id))
         ]);
     }
 
     public function delete($channel, string $id = null): bool
     {
-        if ($channel instanceof Collection) {
-            $path = $this->getPath($channel->get('channel'));
-            $id = $channel->get('id');
+        if ($channel instanceof QueueItem) {
+            $path = $this->getPath($channel->channel);
+            $id = $channel->id;
         } else {
             $path = $this->getPath($channel);
         }
