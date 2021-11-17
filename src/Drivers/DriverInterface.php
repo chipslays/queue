@@ -20,10 +20,19 @@ interface DriverInterface
      *
      * @param string $channel
      * @param array $data
-     * @param integer $sort
+     * @param int $sort
      * @return string
      */
     public function add(string $channel, array $data, int $sort = QUEUE_DEFAULT_SORT): string;
+
+    /**
+     * Get item by ID.
+     *
+     * @param string $channel
+     * @param string $id
+     * @return array|null
+     */
+    public function get(string $channel, string $id): ?array;
 
     /**
      * Get next item in queue.
@@ -73,7 +82,7 @@ interface DriverInterface
      * Returns count, if `channel` not exists returns 0.
      *
      * @param string $channel
-     * @return integer
+     * @return int
      */
     public function count(string $channel): int;
 
