@@ -150,14 +150,14 @@ echo $queue->position('payment', $id); // e.g. 1
 ### `get`
 
 ```php
-    /**
-     * Get item by ID.
-     *
-     * @param string $channel
-     * @param string $id
-     * @return array|null
-     */
-    public function get(string $channel, string $id): ?array;
+/**
+ * Get item by ID.
+ *
+ * @param string $channel
+ * @param string $id
+ * @return array|null
+ */
+public function get(string $channel, string $id): ?array;
 ```
 
 Example:
