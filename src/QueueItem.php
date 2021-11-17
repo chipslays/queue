@@ -3,9 +3,9 @@
 namespace Chipslays\Queue;
 
 /**
- * @property string $id
- * @property string $channel
- * @property mixed $data
+ * @property string|null $id
+ * @property string|null $channel
+ * @property mixed|null $data
  */
 class QueueItem
 {
