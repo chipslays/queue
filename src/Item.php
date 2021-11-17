@@ -5,7 +5,7 @@ namespace Chipslays\Queue;
 /**
  * @property string|null $id
  * @property string|null $channel
- * @property mixed|null $data
+ * @property array|null $data
  */
 class Item
 {
@@ -36,9 +36,9 @@ class Item
     }
 
     /**
-     * @return mixed|null
+     * @return array|null
      */
-    public function getData()
+    public function getData(): ?array
     {
         return $this->item['data'] ?? null;
     }
