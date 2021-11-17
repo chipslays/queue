@@ -238,7 +238,7 @@ $queue = new Queue($driver);
 $queue->add('payment', ['currency' => 'EUR', 'amount' => 10]);
 
 // somewhere in worker/cron code...
-if (!$data = $queue->next('payment')) {
+if (!$item = $queue->next('payment')) {
     return;
 }
 
