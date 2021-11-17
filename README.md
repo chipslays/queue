@@ -161,9 +161,9 @@ echo $queue->position('payment', $id); // e.g. 1
  *
  * @param string $channel
  * @param string $id
- * @return QueueItem|null
+ * @return Item|null
  */
-public function get(string $channel, string $id): ?QueueItem;
+public function get(string $channel, string $id): ?Item;
 ```
 
 Example:
@@ -191,9 +191,9 @@ echo 'data: ' . print_r($item->getData(), true) . PHP_EOL;
  * If queue is empty or `channel` not exists returns `null`.
  *
  * @param string $channel
- * @return QueueItem|null
+ * @return Item|null
  */
-public function first(string $channel): ?QueueItem;
+public function first(string $channel): ?Item;
 ```
 
 Example:
@@ -222,9 +222,9 @@ echo 'data: ' . print_r($item->getData(), true) . PHP_EOL;
  * Get next item in queue.
  *
  * @param string $channel
- * @return QueueItem|null
+ * @return Item|null
  */
-public function next(string $channel): ?QueueItem;
+public function next(string $channel): ?Item;
 ```
 
 Example:
@@ -257,7 +257,7 @@ echo 'data: ' . print_r($item->getData(), true) . PHP_EOL;
  *
  * Returns `true` on success delete and `false` on fail.
  *
- * @param string|QueueItem $channel e.g. Can be passed as result from `first` method.
+ * @param string|Item $channel e.g. Can be passed as result from `first` method.
  * @param string $id
  * @return boolean
  */

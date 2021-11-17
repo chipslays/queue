@@ -2,7 +2,7 @@
 
 namespace Chipslays\Queue\Drivers;
 
-use Chipslays\Queue\QueueItem;
+use Chipslays\Queue\Item;
 use FilesystemIterator;
 
 class File implements DriverInterface
@@ -25,20 +25,20 @@ class File implements DriverInterface
         return $id;
     }
 
-    public function get(string $channel, string $id): ?QueueItem
+    public function get(string $channel, string $id): ?Item
     {
         if (!file_exists($this->getPath($channel))) {
             return null;
         }
 
-        return new QueueItem([
+        return new Item([
             'channel' => $channel,
             'id' => $id,
             'data' => unserialize(file_get_contents($this->getPath($channel) . '/' . $id))
         ]);
     }
 
-    public function next(string $channel): ?QueueItem
+    public function next(string $channel): ?Item
     {
         $item = $this->first($channel);
 
@@ -53,7 +53,7 @@ class File implements DriverInterface
 
     public function delete($channel, string $id = null): bool
     {
-        if ($channel instanceof QueueItem) {
+        if ($channel instanceof Item) {
             $path = $this->getPath($channel->channel);
             $id = $channel->id;
         } else {

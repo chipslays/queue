@@ -3,7 +3,7 @@
 namespace Chipslays\Queue\Drivers;
 
 use Chipslays\Collection\Collection;
-use Chipslays\Queue\QueueItem;
+use Chipslays\Queue\Item;
 
 trait DriverTrait
 {
@@ -17,7 +17,7 @@ trait DriverTrait
         $this->config = new Collection($config);
     }
 
-    public function first(string $channel): ?QueueItem
+    public function first(string $channel): ?Item
     {
         if ($this->count($channel) === 0) {
             return null;
@@ -26,7 +26,7 @@ trait DriverTrait
         $path = $this->getPath($channel);
         $id = scandir($path)[2];
 
-        return new QueueItem([
+        return new Item([
             'channel' => $channel,
             'id' => $id,
             'data' => unserialize(file_get_contents($path . '/' . $id))

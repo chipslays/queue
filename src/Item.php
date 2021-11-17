@@ -7,7 +7,7 @@ namespace Chipslays\Queue;
  * @property string|null $channel
  * @property mixed|null $data
  */
-class QueueItem
+class Item
 {
     private array $item;
 
